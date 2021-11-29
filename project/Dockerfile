@@ -1,7 +1,7 @@
 FROM python:2.7
 LABEL maintainer="Oyindamola Victor"
 
-COPY ./techtrends /app
+COPY ./project/techtrends /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 
