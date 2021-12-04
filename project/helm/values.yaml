@@ -1,30 +1,37 @@
+AppName: techtrends
 namespace:
   name: sandbox
+  apps: techtrends
 
 service:
-  type: ClusterIP
   port: 4111
   targetPort: 3111
   protocol: TCP
+  type: ClusterIP
 
 image:
-  repository: damolacloud/techtrends
+  repository: damolacloud/techtrends 
   tag: latest
   pullPolicy: IfNotPresent
 
 replicaCount: 1
-  
+
 resources:
-  requests: 
-    memory: "64Mi"
-    cpu: "250m"
-  limits:
-    memory: "128Mi"
-    cpu: "500m"
-
-containerPort: 3111
-
-livenessProbe:
-  path: /healthz
+  requests:
+    cpu: 250m
+    memory: 64Mi
+  limits: 
+    memory: 128Mi
+    CPU: 500m
+    
+ports:
+    containerPort: 3111
+    protocol: TCP
 readinessProbe:
-  path: /healthz
+  httpGet:
+    path: /healthz
+    port: 3111
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 3111
