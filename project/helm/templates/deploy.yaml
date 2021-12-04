@@ -29,13 +29,17 @@ spec:
         - containerPort: {{ .Values.ports.containerPort }}
           protocol: {{ .Values.service.protocol }}
         livenessProbe:
+           initialDelaySeconds: 10
+           periodSeconds: 5
            httpGet:
              path: {{ .Values.livenessProbe.path }}
-             port: {{ .Values.livenessProbe.port }}
+             port: 3111
         readinessProbe:
+           initialDelaySeconds: 10
+           periodSeconds: 5
            httpGet:
              path: {{ .Values.readinessProbe.path }}
-             port: {{ .Values.readinessProbe.port }}
+             port: 3111
         resources:
           requests:
             memory: {{ .Values.resources.requests.memory }}
